@@ -1,0 +1,33 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model DataPoint {
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  timestamp DateTime?
+  updatedAt DateTime  @updatedAt
+  value     Float?
+}
+
+model Dashboard {
+  createdAt   DateTime @default(now())
+  description String?
+  id          String   @id @default(cuid())
+  name        String?
+  updatedAt   DateTime @updatedAt
+}
+
+model Alert {
+  createdAt    DateTime  @default(now())
+  id           String    @id @default(cuid())
+  message      String?
+  timestamp    DateTime?
+  triggerValue Float?
+  updatedAt    DateTime  @updatedAt
+}
